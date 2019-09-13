@@ -1,0 +1,51 @@
+@import '../../partials/vars';
+
+.search-container {
+  display: flex;
+  margin-top: 30px;
+}
+
+.search-clear-btn {
+  background-color: $button-color;
+  color: #fff;
+  padding: 7px 10px;
+  font-family: $basic-font;
+
+  &:hover {
+    cursor: pointer;
+    opacity: .7;
+  }
+}
+
+.search-select,
+.search-input {
+  border-radius: 2px;
+  border: 1px solid $input-grey;
+  width: 200px;
+  height: 30px;
+  color: $input-grey;
+  font-family: $basic-font;
+}
+
+.search-input {
+  padding-left: 5px;
+}
+
+.search-select-wrapper {
+  margin-right: 30px;
+}
+
+.search-input-wrapper {
+  display: flex;
+  margin-right: 30px;
+
+  button {
+    width: 30px;
+    height: 30px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: .7;
+    }
+  }
+}
