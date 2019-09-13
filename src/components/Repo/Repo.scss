@@ -4,9 +4,13 @@
   width: 380px;
   border-radius: 5px;
   border: 1px solid $input-grey;
-  border-top-color: red; 
   border-top-width: 5px;
   margin-top: 20px; 
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: $box-shadow;
 }
 
 .repo-inner-container {
@@ -89,7 +93,6 @@
     border-radius: 50%;
     width: 10px;
     height: 10px;
-    background-color: red;
     margin-right: 5px;
   }
 }

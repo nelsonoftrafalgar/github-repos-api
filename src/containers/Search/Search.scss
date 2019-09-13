@@ -39,14 +39,4 @@
 .search-input-wrapper {
   display: flex;
   margin-right: 30px;
-
-  button {
-    width: 30px;
-    height: 30px;
-
-    &:hover {
-      cursor: pointer;
-      opacity: .7;
-    }
-  }
 }
