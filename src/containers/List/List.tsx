@@ -6,20 +6,15 @@ import Repo from '../../components/Repo/Repo'
 import { context } from '../../context/context'
 
 const List = () => {
-  const { list, filter, name } = useContext(context)
+  const { list, filter } = useContext(context)
 
-  const repos = list.map((item) => {
-
-    if (!name && !filter) {
-      return <Repo key={item.id} {...item} />
+  const repos = list.map((repo) => {
+    if (!filter) {
+      return <Repo key={repo.id} {...repo} />
+    } else if (filter && repo.language && repo.language.name === filter) {
+      return <Repo key={repo.id} {...repo} />
     } else {
-      if (name && item.name.includes(name)) {
-        return <Repo key={item.id} {...item} />
-      } else if (filter && item.language === filter) {
-        return <Repo key={item.id} {...item} />
-      } else {
-        return null
-      }
+      return null
     }
   })
 
@@ -30,4 +25,4 @@ const List = () => {
   )
 }
 
-export default List
+export default React.memo(List)

@@ -23,7 +23,7 @@
   border: 1px solid $input-grey;
   width: 200px;
   height: 30px;
-  color: $input-grey;
+  color: #000;
   font-family: $basic-font;
   box-shadow: 0px 0px 6px 0px #e5e5e5;
 }
@@ -32,7 +32,8 @@
   padding-left: 5px;
 }
 
-.search-select-wrapper {
+.search-select-wrapper,
+.search-clear-wrapper {
   margin-right: 30px;
 }
 

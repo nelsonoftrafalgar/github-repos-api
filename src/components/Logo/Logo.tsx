@@ -1,6 +1,6 @@
 import './Logo.scss'
 
-import LogoIcon from '../../assets/logo/appnroll.svg'
+import LogoIcon from '../../assets/logo/github.svg'
 import React from 'react'
 
 const Logo = () => {

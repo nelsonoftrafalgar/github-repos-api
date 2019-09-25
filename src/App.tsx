@@ -1,4 +1,4 @@
-import './App.css';
+import './App.css'
 
 import React, { useState } from 'react'
 
@@ -7,43 +7,41 @@ import Head from './containers/Head/Head'
 import List from './containers/List/List'
 import Search from './containers/Search/Search'
 import { context } from './context/context'
-import { handleStorage } from './utils/handleStorage'
-import { useFetch } from './utils/useFetch'
+import { useGetRepos } from './utils/useGetRepos'
 
 const { Provider } = context
 
+export type Language = { name: string, color: string }
+
+export interface IRepoTile {
+  fullName: string
+  stargazersCount: number
+  forksCount: number
+  htmlUrl: string
+  language: Language | null
+  name: string
+  description: string
+  id: number
+  watchersCount: number
+  isAdded: boolean
+}
+
 const App: React.FC = () => {
   const [filter, setFilter] = useState<string>('')
-  const [name, setName] = useState<string>('')
-  const { list, setList } = useFetch()
+  const [search, setSearch] = useState<string>('')
 
-  const handleToggleAdd = (name: string, value: boolean) => () => {
-    const updatedList = list.map((item) => {
-      if (item.name === name) {
-        item.isAdded = !item.isAdded
-      }
-      return item
-    })
+  const { list, languages, loading } = useGetRepos(search)
 
-    setList(updatedList)
-
-    handleStorage(name, value)
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget.value)
   }
 
   const handleFilterRepos = (language: string) => {
-    setName('')
     setFilter(language)
   }
 
   const handleClearFilter = () => {
     setFilter('')
-    setName('')
-  }
-
-  const handleFindByName = (e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget
-    setFilter('')
-    setName(value)
   }
 
   return (
@@ -52,14 +50,14 @@ const App: React.FC = () => {
       handleFilterRepos,
       filter,
       handleClearFilter,
-      handleFindByName,
-      name,
-      handleToggleAdd
+      search,
+      handleInputChange,
+      languages
     }}>
       <Container>
         <Head />
         <Search />
-        <List />
+        {loading ? <p>Loading...</p> : <List />}
       </Container>
     </Provider>
   )

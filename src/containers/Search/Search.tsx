@@ -3,13 +3,12 @@ import './Search.scss'
 import React, { useContext } from 'react'
 
 import { context } from '../../context/context'
-import { languages } from '../../utils/languages'
 
 const Search = () => {
-  const { handleFilterRepos, handleClearFilter, name, handleFindByName } = useContext(context)
+  const { handleFilterRepos, handleClearFilter, languages, handleInputChange, search, filter } = useContext(context)
 
-  const options = languages.map((language) => {
-    return <option key={language} value={language}>{language}</option>
+  const options = languages.map((lang) => {
+    return <option value={lang} key={lang}>{lang}</option>
   })
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -17,14 +16,16 @@ const Search = () => {
     handleFilterRepos(value)
   }
 
+  const selectValue = filter || 'Select language'
+
   return (
     <div className='search-container'>
       <div className='search-input-wrapper'>
-        <input className='search-input' type="text" placeholder='Search' value={name} onChange={handleFindByName} />
+        <input className='search-input' type="text" placeholder='Search' value={search} onChange={handleInputChange} />
       </div>
       <div className='search-select-wrapper'>
-        <select onChange={handleSelect} className='search-select'>
-          <option value="" disabled selected>Select language</option>
+        <select value={selectValue} onChange={handleSelect} className='search-select'>
+          <option value={selectValue} disabled>{selectValue}</option>
           {options}
         </select>
       </div>
