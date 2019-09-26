@@ -1,3 +1,4 @@
+import { RepositoryData, RepositoryData_search_edges } from "./generatedTypes/RepositoryData"
 import { useEffect, useState } from "react"
 
 import { IRepoTile } from "../App"
@@ -5,14 +6,14 @@ import { SEARCH_REPOS } from "./queries"
 import { useQuery } from "@apollo/react-hooks"
 
 export const useGetRepos = (search: string) => {
-  const [list, setList] = useState([])
+  const [list, setList] = useState<IRepoTile[]>([])
   const [languages, setLanguages] = useState<string[]>([])
   const { loading, error, data } = useQuery(SEARCH_REPOS, { variables: { search } })
 
-  const fetchData = (data: any) => {
+  const fetchData = (data: RepositoryData) => {
     if (data) {
       const languagesList: string[] = []
-      const result = data.search.edges.map((repo: any) => {
+      const result = data.search.edges.map((repo: RepositoryData_search_edges) => {
         const repoTile = {} as IRepoTile
 
         repoTile.fullName = repo.node.nameWithOwner

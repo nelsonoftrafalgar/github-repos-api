@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost"
 
 export const SEARCH_REPOS = gql`
-  query($search: String!) {
+  query RepositoryData($search: String!) {
     search(query: $search, type: REPOSITORY, first: 30) {
       edges {
         node {

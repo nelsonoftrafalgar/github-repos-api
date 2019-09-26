@@ -21,7 +21,7 @@ export interface IRepoTile {
   language: Language | null
   name: string
   description: string
-  id: number
+  id: string
   watchersCount: number
   isAdded: boolean
 }
