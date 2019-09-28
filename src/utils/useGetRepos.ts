@@ -1,16 +1,17 @@
 import { RepositoryData, RepositoryData_search_edges } from "./generatedTypes/RepositoryData"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { IRepoTile } from "./config"
 import { SEARCH_REPOS } from "./queries"
 import { useQuery } from "@apollo/react-hooks"
 
-export const useGetRepos = (search: string) => {
+export const useGetRepos = (search: string, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
   const [list, setList] = useState<IRepoTile[]>([])
   const [languages, setLanguages] = useState<string[]>([])
-  const { loading, error, data } = useQuery(SEARCH_REPOS, { variables: { search } })
-
-  const fetchData = (data: RepositoryData) => {
+  
+  const { error, data } = useQuery(SEARCH_REPOS, { variables: { search } })
+  
+  const fetchData = useCallback((data: RepositoryData) => {
     if (data) {
       const languagesList: string[] = []
       const result = data.search.edges.map((repo: RepositoryData_search_edges) => {
@@ -35,15 +36,16 @@ export const useGetRepos = (search: string) => {
       setLanguages([...new Set(languagesList)] as string[])
       setList(result)
     }
-  }
-
+    setLoading(false)
+  }, [setLoading])
+  
   useEffect(() => {
     fetchData(data)
-  }, [data])
+  }, [data, fetchData])
 
   if (error) {
     console.log(error)
   }
 
-  return { list, languages, loading }
+  return { list, languages }
 }

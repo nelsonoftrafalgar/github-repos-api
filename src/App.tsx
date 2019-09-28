@@ -1,5 +1,3 @@
-import './App.css'
-
 import { ChangeEventType, ClearType } from './utils/config'
 import React, { useState } from 'react'
 
@@ -16,12 +14,18 @@ const App: React.FC = () => {
   const [filter, setFilter] = useState<string>('')
   const [search, setSearch] = useState<string>('')
 
-  const { list, languages, loading } = useGetRepos(search)
+  const [loading, setLoading] = useState(false)
 
+  const { list, languages} = useGetRepos(search, setLoading)
   const handleChange = (type: ClearType) => (e: ChangeEventType) => {
     const { value } = e.currentTarget
     if (type === 'search') {
-      setSearch(value)
+      setLoading(true)
+      const regex = /^[0-9a-zA-Z\s]*$/
+      const hasNoSpecialChars = regex.test(value)
+      if (hasNoSpecialChars) {
+        setSearch(value)
+      }
     } else {
       setFilter(value)
     }
@@ -33,6 +37,9 @@ const App: React.FC = () => {
     } 
     setFilter('')
   }
+  
+  const loadingState = <p>Loading...</p>
+  const emptyState = <p>There's no such repo :(</p>
 
   return (
     <Provider value={{
@@ -41,12 +48,12 @@ const App: React.FC = () => {
       filter,
       handleClear,
       search,
-      languages
+      languages,
     }}>
       <Container>
         <Head />
         <Search />
-        {loading ? <p>Loading...</p> : <List />}
+        {loading ? loadingState : !list.length && search.length ? emptyState : <List/>}
       </Container>
     </Provider>
   )
