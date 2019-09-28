@@ -1,9 +1,87 @@
-import './Repo.scss'
-
 import FooterStat from './FooterStat'
-import { IRepoTile } from '../../App'
+import { IRepoTile } from '../../utils/config'
 import React from 'react'
 import RepoLinkIcon from '../../assets/icons/external_link.svg'
+import styled from 'styled-components'
+import { vars } from '../../utils/styleVars'
+
+const Wrapper = styled('div')<{borderTopColor: string}>`
+  width: 380px;
+  border-radius: 5px;
+  border: 1px solid ${vars['input-grey']};
+  border-top-width: 5px;
+  margin-top: 20px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: ${vars['box-shadow']};
+  ${({borderTopColor}) => `border-top-color: ${borderTopColor};`}
+`
+
+const InnerContainer = styled.div`
+  padding: 30px;
+`
+
+const TitleWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`
+
+const Title = styled.h2`
+  font-family: ${vars['basic-font']};
+  font-size: 18px;
+  color: ${vars['basic-font-color']};
+`
+
+const LinkWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+`
+
+const LinkIcon = styled.img`
+  margin-right: 10px;
+`
+
+const Link = styled.a`
+  text-decoration: none;
+  color: ${vars['button-color']};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+const Description = styled.p`
+  font-family: ${vars['basic-font']};
+  color: ${vars['secondary-font-color']};
+  margin-top: 20px;
+`
+
+const Footer = styled.div`
+  widows: 100%;
+  height: 90px;
+  padding: 30px;
+  background-color: #f6f9fe; 
+  display: flex;
+  justify-content: flex-end;
+`
+
+
+const Language = styled.div`
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+
+  div {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+  }
+`
 
 const Repo: React.FC<IRepoTile> = ({
   fullName,
@@ -19,27 +97,27 @@ const Repo: React.FC<IRepoTile> = ({
   const color = `${language ? language.color : ''}`
 
   return (
-    <div className='repo-wrapper' style={{ borderTopColor: color }} >
-      <div className='repo-inner-container'>
-        <div className='repo-title-wrapper'>
-          <h2 className='repo-title'>{name}</h2>
-        </div>
-        <div className='repo-link-wrapper'>
-          <img className='repo-link-icon' src={RepoLinkIcon} alt="repo link icon" />
-          <a className='repo-link' target='_blank' rel="noopener noreferrer" href={htmlUrl}>{fullName}</a>
-        </div>
-        <p className='repo-description'>{description}</p>
-      </div>
-      <div className='repo-footer'>
-        <div className='repo-footer-language'>
+    <Wrapper borderTopColor={color}>
+      <InnerContainer>
+        <TitleWrapper>
+          <Title>{name}</Title>
+        </TitleWrapper>
+        <LinkWrapper>
+          <LinkIcon src={RepoLinkIcon} alt="repo link icon" />
+          <Link target='_blank' rel="noopener noreferrer" href={htmlUrl}>{fullName}</Link>
+        </LinkWrapper>
+        <Description>{description}</Description>
+      </InnerContainer>
+      <Footer>
+        <Language>
           <div style={{ backgroundColor: color }} />
           <span>{language ? language.name : ''}</span>
-        </div>
+        </Language>
         <FooterStat count={stargazersCount} type='stars' />
         <FooterStat count={watchersCount} type='visitors' />
         <FooterStat count={forksCount} type='issues' />
-      </div>
-    </div>
+      </Footer>
+    </Wrapper>
   )
 }
 

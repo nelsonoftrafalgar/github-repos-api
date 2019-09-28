@@ -1,7 +1,7 @@
 import { RepositoryData, RepositoryData_search_edges } from "./generatedTypes/RepositoryData"
 import { useEffect, useState } from "react"
 
-import { IRepoTile } from "../App"
+import { IRepoTile } from "./config"
 import { SEARCH_REPOS } from "./queries"
 import { useQuery } from "@apollo/react-hooks"
 

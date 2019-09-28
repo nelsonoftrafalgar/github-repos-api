@@ -1,5 +1,6 @@
 import React from 'react'
 import { getIcon } from '../../utils/getIcon'
+import styled from 'styled-components'
 
 export type Icon = 'stars' | 'issues' | 'visitors'
 
@@ -8,12 +9,22 @@ interface IFooterStatProps {
   count: number
 }
 
+const Stat = styled.div`
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+`
+
+const Icon = styled.img`
+  margin-right: 5px;
+`
+
 const FooterStat: React.FC<IFooterStatProps> = ({ type, count }) => {
   return (
-    <div className='repo-footer-stat'>
-      <img className='repo-footer-icon' src={getIcon(type)} alt={`${type} icon`} />
+    <Stat>
+      <Icon src={getIcon(type)} alt={`${type} icon`} />
       <span>{count}</span>
-    </div>
+    </Stat>
   )
 }
 

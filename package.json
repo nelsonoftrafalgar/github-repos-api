@@ -8,6 +8,7 @@
     "@types/node": "12.7.5",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
+    "@types/styled-components": "^4.1.19",
     "apollo": "^2.18.3",
     "apollo-boost": "^0.4.4",
     "apollo-link-context": "^1.0.19",
@@ -16,6 +17,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
+    "styled-components": "^4.4.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "typescript": "3.6.3"
   },

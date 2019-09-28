@@ -1,30 +1,16 @@
 import './App.css'
 
+import { ChangeEventType, ClearType } from './utils/config'
 import React, { useState } from 'react'
 
-import Container from './containers/Container/Container'
-import Head from './containers/Head/Head'
-import List from './containers/List/List'
-import Search from './containers/Search/Search'
+import Container from './containers/Container'
+import Head from './containers/Head'
+import List from './containers/List'
+import Search from './containers/Search'
 import { context } from './context/context'
 import { useGetRepos } from './utils/useGetRepos'
 
 const { Provider } = context
-
-export type Language = { name: string, color: string }
-
-export interface IRepoTile {
-  fullName: string
-  stargazersCount: number
-  forksCount: number
-  htmlUrl: string
-  language: Language | null
-  name: string
-  description: string
-  id: string
-  watchersCount: number
-  isAdded: boolean
-}
 
 const App: React.FC = () => {
   const [filter, setFilter] = useState<string>('')
@@ -32,26 +18,29 @@ const App: React.FC = () => {
 
   const { list, languages, loading } = useGetRepos(search)
 
-  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value)
+  const handleChange = (type: ClearType) => (e: ChangeEventType) => {
+    const { value } = e.currentTarget
+    if (type === 'search') {
+      setSearch(value)
+    } else {
+      setFilter(value)
+    }
   }
 
-  const handleFilterRepos = (language: string) => {
-    setFilter(language)
-  }
-
-  const handleClearFilter = () => {
+  const handleClear = (type: ClearType) => () => {
+    if (type === 'search') {
+      setSearch('')
+    } 
     setFilter('')
   }
 
   return (
     <Provider value={{
       list,
-      handleFilterRepos,
+      handleChange,
       filter,
-      handleClearFilter,
+      handleClear,
       search,
-      handleInputChange,
       languages
     }}>
       <Container>

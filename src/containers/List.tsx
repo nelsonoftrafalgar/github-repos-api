@@ -1,9 +1,15 @@
-import './List.scss'
-
 import React, { useContext } from 'react'
 
-import Repo from '../../components/Repo/Repo'
-import { context } from '../../context/context'
+import Repo from '../components/Repo/Repo'
+import { context } from '../context/context'
+import styled from 'styled-components'
+
+const ListWrapper = styled.div`
+  margin: 10px 0 50px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
 
 const List = () => {
   const { list, filter } = useContext(context)
@@ -19,9 +25,9 @@ const List = () => {
   })
 
   return (
-    <div className='list-wrapper'>
+    <ListWrapper>
       {repos}
-    </div>
+    </ListWrapper>
   )
 }
 
