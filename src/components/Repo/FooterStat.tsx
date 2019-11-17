@@ -1,13 +1,7 @@
+import { IFooterStatProps } from '../../utils/config'
 import React from 'react'
 import { getIcon } from '../../utils/getIcon'
 import styled from 'styled-components'
-
-export type Icon = 'stars' | 'issues' | 'visitors'
-
-interface IFooterStatProps {
-  type: Icon
-  count: number
-}
 
 const Stat = styled.div`
   margin-left: 20px;
@@ -28,4 +22,4 @@ const FooterStat: React.FC<IFooterStatProps> = ({ type, count }) => {
   )
 }
 
-export default FooterStat
+export default React.memo(FooterStat)

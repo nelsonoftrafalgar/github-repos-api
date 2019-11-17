@@ -33,13 +33,13 @@ const Details = () => {
     <Wrapper>
       <Title>Search Github repositories</Title>
       <IconContainer>
-        <img src={LinkIcon} alt="link-icon" />
-        <Link 
-          href="http://github.com" 
-          target='_blank' 
+        <img src={LinkIcon} alt='link-icon' />
+        <Link
+          href='https://github.com'
+          target='_blank'
           rel='noopener noreferrer'
         >
-          http://github.com
+          https://github.com
         </Link>
       </IconContainer>
     </Wrapper>

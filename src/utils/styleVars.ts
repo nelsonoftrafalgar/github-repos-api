@@ -1,5 +1,5 @@
 export const vars = {
-  'basic-font': "'Quicksand', sans-serif",
+  'basic-font': '"Quicksand", sans-serif',
   'basic-font-color': '#0f1436',
   'secondary-font-color': '#444',
   'button-color': '#0062ff',

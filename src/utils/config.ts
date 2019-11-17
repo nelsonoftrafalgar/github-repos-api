@@ -1,4 +1,4 @@
-export type Language = { name: string, color: string }
+export interface ILanguage { name: string, color: string }
 
 export type ClearType = 'search' | 'filter'
 
@@ -16,7 +16,7 @@ export interface IRepoTile {
   stargazersCount: number
   forksCount: number
   htmlUrl: string
-  language: Language | null
+  language: ILanguage | null
   name: string
   description: string
   id: string
@@ -27,3 +27,10 @@ export interface IRepoTile {
 export type InputType = HTMLInputElement | HTMLSelectElement
 
 export type ChangeEventType = React.FormEvent<InputType> | React.ChangeEvent<InputType>
+
+export type Icon = 'stars' | 'issues' | 'visitors'
+
+export interface IFooterStatProps {
+  type: Icon
+  count: number
+}

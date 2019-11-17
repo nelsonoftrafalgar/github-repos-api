@@ -1,7 +1,7 @@
-import { ApolloClient, HttpLink, InMemoryCache } from "apollo-boost"
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost'
 
-import { setContext } from "apollo-link-context"
-import { token } from "./graphql-token"
+import { setContext } from 'apollo-link-context'
+import { token } from './graphql-token'
 
 const cache = new InMemoryCache()
 const link = new HttpLink({
@@ -12,7 +12,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : ''
     }
   }
 })

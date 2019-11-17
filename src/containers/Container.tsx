@@ -7,7 +7,7 @@ const StyledContainer = styled.div`
   height: 100vh;
 `
 
-const Container = ({ children }: any) => {
+const Container: React.FC = ({ children }) => {
   return (
     <StyledContainer>
       {children}

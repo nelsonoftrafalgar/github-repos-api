@@ -13,7 +13,7 @@ const ListWrapper = styled.div`
 
 const List = () => {
   const { filter, list } = useContext(context)
-  
+
   const repos = list.map((repo) => {
     if (!filter) {
       return <Repo key={repo.id} {...repo} />
@@ -31,4 +31,4 @@ const List = () => {
   )
 }
 
-export default List
+export default React.memo(List)

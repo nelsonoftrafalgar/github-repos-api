@@ -1,4 +1,4 @@
-import { Icon } from '../components/Repo/FooterStat'
+import { Icon } from './config'
 import IssuesIcon from '../assets/icons/issues.svg'
 import StarsIcon from '../assets/icons/stars.svg'
 import VisitorsIcon from '../assets/icons/visitors.svg'

@@ -10,7 +10,7 @@ const Wrapper = styled('div')<{borderTopColor: string}>`
   border-radius: 5px;
   border: 1px solid ${vars['input-grey']};
   border-top-width: 5px;
-  margin-top: 20px; 
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -64,11 +64,10 @@ const Footer = styled.div`
   widows: 100%;
   height: 90px;
   padding: 30px;
-  background-color: #f6f9fe; 
+  background-color: #f6f9fe;
   display: flex;
   justify-content: flex-end;
 `
-
 
 const Language = styled.div`
   margin-right: auto;
@@ -91,7 +90,7 @@ const Repo: React.FC<IRepoTile> = ({
   language,
   name,
   description,
-  watchersCount,
+  watchersCount
 }) => {
 
   const color = `${language ? language.color : ''}`
@@ -103,8 +102,8 @@ const Repo: React.FC<IRepoTile> = ({
           <Title>{name}</Title>
         </TitleWrapper>
         <LinkWrapper>
-          <LinkIcon src={RepoLinkIcon} alt="repo link icon" />
-          <Link target='_blank' rel="noopener noreferrer" href={htmlUrl}>{fullName}</Link>
+          <LinkIcon src={RepoLinkIcon} alt='repo link icon' />
+          <Link target='_blank' rel='noopener noreferrer' href={htmlUrl}>{fullName}</Link>
         </LinkWrapper>
         <Description>{description}</Description>
       </InnerContainer>
@@ -121,4 +120,4 @@ const Repo: React.FC<IRepoTile> = ({
   )
 }
 
-export default Repo
+export default React.memo(Repo)

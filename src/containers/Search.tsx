@@ -5,13 +5,15 @@ import { context } from '../context/context'
 import styled from 'styled-components'
 import { vars } from '../utils/styleVars'
 
-type WithPadding = {withPadding?: boolean}
+interface IWithPadding  {
+  withPadding?: boolean
+}
 
 const Wrapper = styled.div`
   margin-right: 30px;
 `
 
-const Input = styled('input')<WithPadding>`
+const Input = styled('input')<IWithPadding>`
   border-radius: 2px;
   border: 1px solid ${vars['input-grey']};
   width: 200px;
@@ -36,16 +38,16 @@ const Button = styled.button`
 `
 
 const Search = () => {
-  const { 
-    handleChange, 
-    handleClear, 
-    languages, 
-    search, 
-    filter, 
+  const {
+    handleChange,
+    handleClear,
+    languages,
+    search,
+    filter
   } = useContext(context)
 
   const options = languages.map((lang) => {
-    return <option value={lang} key={lang}>{lang}</option>
+    return <option aria-selected={false} value={lang} key={lang}>{lang}</option>
   })
 
   const selectValue = filter || 'Select language'
@@ -55,7 +57,7 @@ const Search = () => {
       <Wrapper>
         <Input
           withPadding={true}
-          type="text"
+          type='text'
           placeholder='Search'
           value={search}
           onChange={handleChange('search')}
@@ -66,7 +68,7 @@ const Search = () => {
       </Wrapper>
       <Wrapper>
         <Input as='select' value={selectValue} onChange={handleChange('filter')}>
-          <option value={selectValue} disabled>{selectValue}</option>
+          <option aria-selected={false} value={selectValue} disabled={true}>{selectValue}</option>
           {options}
         </Input>
       </Wrapper>
@@ -77,4 +79,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default React.memo(Search)
