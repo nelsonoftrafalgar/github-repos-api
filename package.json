@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
     "@types/react": "16.9.2",
@@ -29,7 +31,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "apollo:generate_types": "apollo codegen:generate --localSchemaFile=schema.json --target=typescript --includes=src/**/*.ts --tagName=gql --addTypename --outputFlat src/utils/generatedTypes",
-    "apollo:get_schema": "apollo client:download-schema --config=./apollo.config.js"
+    "apollo:get_schema": "apollo client:download-schema --config=./apollo.config.js",
+    "tslint": "tslint src/**/*.ts{,x} --format codeFrame"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/user-event": "^7.1.2"
   }
 }

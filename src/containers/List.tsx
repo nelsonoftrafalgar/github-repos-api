@@ -25,7 +25,7 @@ const List = () => {
   })
 
   return (
-    <ListWrapper>
+    <ListWrapper data-testid='ListWrapper'>
       {repos}
     </ListWrapper>
   )

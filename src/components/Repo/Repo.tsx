@@ -96,7 +96,7 @@ const Repo: React.FC<IRepoTile> = ({
   const color = `${language ? language.color : ''}`
 
   return (
-    <Wrapper borderTopColor={color}>
+    <Wrapper borderTopColor={color} data-testid='RepoWrapper'>
       <InnerContainer>
         <TitleWrapper>
           <Title>{name}</Title>

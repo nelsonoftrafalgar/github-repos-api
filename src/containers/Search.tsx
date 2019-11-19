@@ -47,7 +47,15 @@ const Search = () => {
   } = useContext(context)
 
   const options = languages.map((lang) => {
-    return <option aria-selected={false} value={lang} key={lang}>{lang}</option>
+    return (
+      <option
+        aria-selected={false}
+        value={lang}
+        key={lang}
+      >
+        {lang}
+      </option>
+    )
   })
 
   const selectValue = filter || 'Select language'
@@ -67,7 +75,12 @@ const Search = () => {
         <Button onClick={handleClear('search')}>Clear search</Button>
       </Wrapper>
       <Wrapper>
-        <Input as='select' value={selectValue} onChange={handleChange('filter')}>
+        <Input
+          data-testid='filter-select'
+          as='select'
+          value={selectValue}
+          onChange={handleChange('filter')}
+        >
           <option aria-selected={false} value={selectValue} disabled={true}>{selectValue}</option>
           {options}
         </Input>
