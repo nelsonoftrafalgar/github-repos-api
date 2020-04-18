@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nelsonoftrafalgar.github.io/fetch_anr_repos",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -14,6 +15,7 @@
     "apollo": "^2.18.3",
     "apollo-boost": "^0.4.4",
     "apollo-link-context": "^1.0.19",
+    "gh-pages": "^2.2.0",
     "graphql": "^14.3.1",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
@@ -26,6 +28,8 @@
     "typescript": "3.6.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
