@@ -1,5 +1,11 @@
+import Store from 'store/Store'
+
 const App = () => {
-	return <div className='App'></div>
+	return (
+		<Store>
+			<div className='App'></div>
+		</Store>
+	)
 }
 
 export default App
