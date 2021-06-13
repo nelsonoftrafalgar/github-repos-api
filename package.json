@@ -1,59 +1,45 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://nelsonoftrafalgar.github.io/fetch_anr_repos",
-  "dependencies": {
-    "@apollo/react-hooks": "^3.1.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.5",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
-    "@types/styled-components": "^4.1.19",
-    "apollo": "^2.18.3",
-    "apollo-boost": "^0.4.4",
-    "apollo-link-context": "^1.0.19",
-    "gh-pages": "^2.2.0",
-    "graphql": "^14.3.1",
-    "node-sass": "^4.12.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1",
-    "styled-components": "^4.4.0",
-    "tslint": "^5.20.1",
-    "tslint-microsoft-contrib": "^6.2.0",
-    "tslint-react": "^4.1.0",
-    "typescript": "3.6.3"
-  },
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "apollo:generate_types": "apollo codegen:generate --localSchemaFile=schema.json --target=typescript --includes=src/**/*.ts --tagName=gql --addTypename --outputFlat src/utils/generatedTypes",
-    "apollo:get_schema": "apollo client:download-schema --config=./apollo.config.js",
-    "tslint": "tslint src/**/*.ts{,x} --format codeFrame"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@testing-library/user-event": "^7.1.2"
-  }
+	"name": "github-repos-api",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-scripts": "4.0.3",
+		"web-vitals": "^1.0.1"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^5.11.4",
+		"@testing-library/react": "^11.1.0",
+		"@testing-library/user-event": "^12.1.10",
+		"@types/jest": "^26.0.15",
+		"@types/node": "^12.0.0",
+		"@types/react": "^17.0.0",
+		"@types/react-dom": "^17.0.0",
+		"typescript": "^4.1.2"
+	}
 }
