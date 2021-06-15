@@ -1,18 +1,51 @@
-import { FC, createContext, useContext, useState } from 'react'
+import { FC, createContext, useContext, useEffect, useState } from 'react'
+import { IRawData, IRepo, IStoreContext } from 'store/types'
 
 import { SEARCH_REPOS } from 'config/queries'
-import { useQuery } from '@apollo/client'
+import { extrackLanguages } from 'utils/extrackLanguages'
+import { getRepoList } from 'utils/getRepoList'
+import { parseData } from 'utils/parseData'
+import { useLazyQuery } from '@apollo/client'
 
-const StoreContext = createContext({} as any)
+const StoreContext = createContext({} as IStoreContext)
 
 const Store: FC = ({ children }) => {
-	const [search, setSearch] = useState('react')
+	const [data, setData] = useState<IRepo[]>([])
+	const [filter, setFilter] = useState('')
+	const [languages, setLanguages] = useState<string[]>([])
+	const [isEmptySearch, setIsEmptySearch] = useState(false)
+	const [getRepos, { error, loading }] = useLazyQuery(SEARCH_REPOS, {
+		onCompleted: (rawData: IRawData) => {
+			if (rawData.search.edges.length === 0) setIsEmptySearch(true)
+			else setIsEmptySearch(false)
+			const parsedData = parseData(rawData)
+			setLanguages(extrackLanguages(parsedData))
+			setData(parsedData)
+		},
+	})
 
-	const { error, loading, data } = useQuery(SEARCH_REPOS, { variables: { search } })
+	useEffect(() => {
+		if (loading) setData([])
+	}, [loading])
 
-	console.log('error', error, 'data', data, 'loading', loading)
+	const repoList = getRepoList(filter, data)
 
-	return <div>{children}</div>
+	return (
+		<StoreContext.Provider
+			value={{
+				getRepos,
+				setFilter,
+				filter,
+				languages,
+				repoList,
+				loading,
+				error,
+				isEmptySearch,
+			}}
+		>
+			{children}
+		</StoreContext.Provider>
+	)
 }
 
 export default Store
