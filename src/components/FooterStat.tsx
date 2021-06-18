@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
+import { formatNumber } from 'utils/formatNumber'
 import { icons } from 'utils/icons'
 import styled from 'styled-components'
 
 const Stat = styled.div`
-	margin-left: 20px;
 	display: flex;
 	align-items: center;
 `
@@ -17,13 +17,13 @@ interface IProps {
 	count: number
 }
 
-const FooterStat: React.FC<IProps> = ({ type, count }) => {
+const FooterStat: FC<IProps> = ({ type, count }) => {
 	return (
 		<Stat>
 			<Icon src={icons[type]} alt={`${type} icon`} />
-			<span>{count}</span>
+			<span>{formatNumber(count)}</span>
 		</Stat>
 	)
 }
 
-export default React.memo(FooterStat)
+export default FooterStat

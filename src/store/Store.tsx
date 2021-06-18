@@ -1,4 +1,4 @@
-import { FC, createContext, useContext, useEffect, useState } from 'react'
+import { FC, createContext, useContext, useEffect, useRef, useState } from 'react'
 import { IRawData, IRepo, IStoreContext } from 'store/types'
 
 import { SEARCH_REPOS } from 'config/queries'
@@ -14,6 +14,8 @@ const Store: FC = ({ children }) => {
 	const [filter, setFilter] = useState('')
 	const [languages, setLanguages] = useState<string[]>([])
 	const [isEmptySearch, setIsEmptySearch] = useState(false)
+	const [search, setSearch] = useState('')
+	const initialRender = useRef(true)
 	const [getRepos, { error, loading }] = useLazyQuery(SEARCH_REPOS, {
 		onCompleted: (rawData: IRawData) => {
 			if (rawData.search.edges.length === 0) setIsEmptySearch(true)
@@ -28,12 +30,17 @@ const Store: FC = ({ children }) => {
 		if (loading) setData([])
 	}, [loading])
 
+	useEffect(() => {
+		if (!initialRender.current) getRepos({ variables: { search } })
+		initialRender.current = false
+		setIsEmptySearch(false)
+	}, [search, getRepos])
+
 	const repoList = getRepoList(filter, data)
 
 	return (
 		<StoreContext.Provider
 			value={{
-				getRepos,
 				setFilter,
 				filter,
 				languages,
@@ -41,6 +48,8 @@ const Store: FC = ({ children }) => {
 				loading,
 				error,
 				isEmptySearch,
+				setSearch,
+				search,
 			}}
 		>
 			{children}

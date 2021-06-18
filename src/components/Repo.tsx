@@ -1,12 +1,14 @@
+import Col from 'styles/Col'
+import { FC } from 'react'
 import FooterStat from 'components/FooterStat'
 import { IRepo } from 'store/types'
-import React from 'react'
 import RepoLinkIcon from 'assets/icons/external_link.svg'
+import Row from 'styles/Row'
 import styled from 'styled-components'
 import { vars } from 'styles/vars'
 
 const Wrapper = styled('div')<{ borderTopColor: string }>`
-	width: 380px;
+	width: 100%;
 	border-radius: 5px;
 	border: 1px solid ${vars.input_grey};
 	border-top-width: 5px;
@@ -15,17 +17,12 @@ const Wrapper = styled('div')<{ borderTopColor: string }>`
 	flex-direction: column;
 	justify-content: space-between;
 	box-shadow: ${vars.box_shadow};
+	overflow: hidden;
 	${({ borderTopColor }) => `border-top-color: ${borderTopColor};`}
 `
 
 const InnerContainer = styled.div`
-	padding: 30px;
-`
-
-const TitleWrapper = styled.div`
-	display: flex;
-	width: 100%;
-	justify-content: space-between;
+	padding: 15px;
 `
 
 const Title = styled.h2`
@@ -36,9 +33,6 @@ const Title = styled.h2`
 
 const LinkWrapper = styled.div`
 	display: flex;
-	width: 100%;
-	justify-content: flex-start;
-	align-items: center;
 	margin-top: 20px;
 `
 
@@ -63,14 +57,13 @@ const Description = styled.p`
 const Footer = styled.div`
 	widows: 100%;
 	height: 90px;
-	padding: 30px;
+	padding: 15px;
 	background-color: #f6f9fe;
 	display: flex;
 	justify-content: flex-end;
 `
 
 const Language = styled.div`
-	margin-right: auto;
 	display: flex;
 	align-items: center;
 
@@ -82,7 +75,7 @@ const Language = styled.div`
 	}
 `
 
-const Repo: React.FC<IRepo> = ({
+const Repo: FC<IRepo> = ({
 	fullName,
 	stargazersCount,
 	forksCount,
@@ -97,9 +90,7 @@ const Repo: React.FC<IRepo> = ({
 	return (
 		<Wrapper borderTopColor={color} data-testid='RepoWrapper'>
 			<InnerContainer>
-				<TitleWrapper>
-					<Title>{name}</Title>
-				</TitleWrapper>
+				<Title>{name}</Title>
 				<LinkWrapper>
 					<LinkIcon src={RepoLinkIcon} alt='repo link icon' />
 					<Link target='_blank' rel='noopener noreferrer' href={htmlUrl}>
@@ -109,16 +100,26 @@ const Repo: React.FC<IRepo> = ({
 				<Description>{description}</Description>
 			</InnerContainer>
 			<Footer>
-				<Language>
-					<div style={{ backgroundColor: color }} />
-					<span>{language ? language.name : ''}</span>
-				</Language>
-				<FooterStat count={stargazersCount} type='stars' />
-				<FooterStat count={watchersCount} type='visitors' />
-				<FooterStat count={forksCount} type='issues' />
+				<Row>
+					<Col>
+						<Language>
+							<div style={{ backgroundColor: color }} />
+							<span>{language ? language.name : ''}</span>
+						</Language>
+					</Col>
+					<Col xs={4}>
+						<FooterStat count={stargazersCount} type='stars' />
+					</Col>
+					<Col xs={4}>
+						<FooterStat count={watchersCount} type='visitors' />
+					</Col>
+					<Col xs={4}>
+						<FooterStat count={forksCount} type='issues' />
+					</Col>
+				</Row>
 			</Footer>
 		</Wrapper>
 	)
 }
 
-export default React.memo(Repo)
+export default Repo

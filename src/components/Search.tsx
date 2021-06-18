@@ -1,31 +1,48 @@
-import { useEffect, useRef, useState } from 'react'
+import { breakpoints, mediaQueries } from 'styles/responsive'
 
-import { Container } from 'styles/shared'
+import Col from 'styles/Col'
+import Row from 'styles/Row'
 import styled from 'styled-components'
 import { useStore } from 'store/Store'
 import { vars } from 'styles/vars'
 
 const Wrapper = styled.div`
-	margin-right: 30px;
+	display: flex;
+	width: 100%;
+	justify-content: center;
 `
 
-const Input = styled('input')<{ withPadding?: boolean }>`
+const Input = styled.input`
 	border-radius: 2px;
 	border: 1px solid ${vars.input_grey};
 	width: 200px;
 	height: 30px;
-	color: #000;
-	font-family: ${vars.basic_font};
+	color: ${vars.secondary_font_color};
 	box-shadow: ${vars.box_shadow};
+	margin-right: 10px;
+	padding-left: 5px;
+	${mediaQueries.up(breakpoints.md)} {
+		margin-right: 30px;
+	}
+`
 
-	${({ withPadding }) => withPadding && 'padding-left: 5px;'}
+const Select = styled.select`
+	border-radius: 2px;
+	border: 1px solid ${vars.input_grey};
+	width: 200px;
+	height: 30px;
+	color: ${vars.secondary_font_color};
+	box-shadow: ${vars.box_shadow};
+	margin-right: 10px;
+	${mediaQueries.up(breakpoints.md)} {
+		margin-right: 30px;
+	}
 `
 
 const Button = styled.button`
 	background-color: ${vars.button_color};
-	color: #fff;
-	padding: 7px 10px;
-	font-family: ${vars.basic_font};
+	color: ${vars.light_font_color};
+	padding: 7px;
 
 	&:hover {
 		cursor: pointer;
@@ -34,52 +51,42 @@ const Button = styled.button`
 `
 
 const Search = () => {
-	const { getRepos, filter, setFilter, languages } = useStore()
-	const [search, setSearch] = useState<string>('')
-	const initialRender = useRef(true)
-
-	useEffect(() => {
-		if (!initialRender.current) getRepos({ variables: { search } })
-		initialRender.current = false
-	}, [search, getRepos])
-
+	const { search, setSearch, filter, setFilter, languages } = useStore()
 	const selectValue = filter || 'Select language'
 
 	return (
-		<Container>
-			<Wrapper>
-				<Input
-					withPadding={true}
-					type='text'
-					placeholder='Search'
-					value={search}
-					onChange={(e) => setSearch(e.currentTarget.value)}
-				/>
-			</Wrapper>
-			<Wrapper>
-				<Button onClick={() => setSearch('')}>Clear search</Button>
-			</Wrapper>
-			<Wrapper>
-				<Input
-					data-testid='filter-select'
-					as='select'
-					value={selectValue}
-					onChange={(e: any) => setFilter(e.currentTarget.value)}
-				>
-					<option aria-selected={false} value={selectValue} disabled={true}>
-						{selectValue}
-					</option>
-					{languages.map((lang) => (
-						<option aria-selected={false} value={lang} key={lang}>
-							{lang}
+		<Row>
+			<Col md={6} mt={30}>
+				<Wrapper>
+					<Input
+						type='text'
+						placeholder='Search'
+						value={search}
+						onChange={(e) => setSearch(e.currentTarget.value)}
+					/>
+					<Button onClick={() => setSearch('')}>Clear search</Button>
+				</Wrapper>
+			</Col>
+			<Col md={6} mt={30}>
+				<Wrapper>
+					<Select
+						data-testid='filter-select'
+						value={selectValue}
+						onChange={(e) => setFilter(e.currentTarget.value)}
+					>
+						<option aria-selected={false} value={selectValue} disabled={true}>
+							{selectValue}
 						</option>
-					))}
-				</Input>
-			</Wrapper>
-			<Wrapper>
-				<Button onClick={() => setFilter('')}>Clear filters</Button>
-			</Wrapper>
-		</Container>
+						{languages.map((lang) => (
+							<option aria-selected={false} value={lang} key={lang}>
+								{lang}
+							</option>
+						))}
+					</Select>
+					<Button onClick={() => setFilter('')}>Clear filters</Button>
+				</Wrapper>
+			</Col>
+		</Row>
 	)
 }
 

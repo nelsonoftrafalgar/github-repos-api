@@ -1,13 +1,8 @@
+import Col from 'styles/Col'
 import Repo from 'components/Repo'
+import Row from 'styles/Row'
 import styled from 'styled-components'
 import { useStore } from 'store/Store'
-
-const ListWrapper = styled.div`
-	margin: 10px 0 50px 0;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-`
 
 const Loader = styled.div`
 	margin-top: 50px;
@@ -31,9 +26,9 @@ const EmptySearch = styled.div`
 `
 
 const List = () => {
-	const { repoList, loading, error, isEmptySearch } = useStore()
+	const { repoList, loading, error, isEmptySearch, search } = useStore()
 
-	if (isEmptySearch) {
+	if (search && isEmptySearch) {
 		return <EmptySearch>Empty search</EmptySearch>
 	}
 
@@ -46,11 +41,13 @@ const List = () => {
 	}
 
 	return (
-		<ListWrapper data-testid='ListWrapper'>
+		<Row data-testid='ListWrapper'>
 			{repoList.map((repo) => (
-				<Repo key={repo.id} {...repo} />
+				<Col key={repo.id} sm={6} md={4}>
+					<Repo {...repo} />
+				</Col>
 			))}
-		</ListWrapper>
+		</Row>
 	)
 }
 

@@ -1,5 +1,6 @@
-import { ApolloError, OperationVariables, QueryLazyOptions } from '@apollo/client'
 import { Dispatch, SetStateAction } from 'react'
+
+import { ApolloError } from '@apollo/client'
 
 export interface IRawData {
 	search: {
@@ -48,5 +49,6 @@ export interface IStoreContext {
 	error: ApolloError | undefined
 	isEmptySearch: boolean
 	setFilter: Dispatch<SetStateAction<string>>
-	getRepos: (options?: QueryLazyOptions<OperationVariables> | undefined) => void
+	setSearch: Dispatch<SetStateAction<string>>
+	search: string
 }
