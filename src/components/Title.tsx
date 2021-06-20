@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 const Title = () => {
 	return (
 		<Wrapper>
-			<Heading>{dictionary.appTitle}</Heading>
+			<Heading data-testid='title'>{dictionary.appTitle}</Heading>
 		</Wrapper>
 	)
 }

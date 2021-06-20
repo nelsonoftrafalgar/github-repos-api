@@ -21,7 +21,7 @@ const Image = styled.img`
 
 const Logo = () => (
 	<LogoContainer>
-		<Image src={LogoIcon} alt='logo' />
+		<Image data-testid='logo' src={LogoIcon} alt='logo' />
 	</LogoContainer>
 )
 

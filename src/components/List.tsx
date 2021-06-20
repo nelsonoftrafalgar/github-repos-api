@@ -30,19 +30,19 @@ const List = () => {
 	const { repoList, loading, error, isEmptySearch, search } = useStore()
 
 	if (search && isEmptySearch) {
-		return <EmptySearch>{dictionary.emptySearch}</EmptySearch>
+		return <EmptySearch data-testid='empty-search'>{dictionary.emptySearch}</EmptySearch>
 	}
 
 	if (error) {
-		return <Error>{error.message}</Error>
+		return <Error data-testid='error-message'>{error.message}</Error>
 	}
 
 	if (loading) {
-		return <Loader>{dictionary.loading}</Loader>
+		return <Loader data-testid='loading-message'>{dictionary.loading}</Loader>
 	}
 
 	return (
-		<Row data-testid='ListWrapper'>
+		<Row data-testid='list-wrapper'>
 			{repoList.map((repo) => (
 				<Col key={repo.id} sm={6} md={4}>
 					<Repo {...repo} />

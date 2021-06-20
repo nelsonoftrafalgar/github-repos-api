@@ -64,8 +64,11 @@ const Search = () => {
 						placeholder={dictionary.search}
 						value={search}
 						onChange={(e) => setSearch(e.currentTarget.value)}
+						data-testid='search-input'
 					/>
-					<Button onClick={() => setSearch('')}>{dictionary.clearSearch}</Button>
+					<Button data-testid='clear-search-button' onClick={() => setSearch('')}>
+						{dictionary.clearSearch}
+					</Button>
 				</Wrapper>
 			</Col>
 			<Col md={6} mt={30}>
@@ -84,7 +87,9 @@ const Search = () => {
 							</option>
 						))}
 					</Select>
-					<Button onClick={() => setFilter('')}>{dictionary.clearFilters}</Button>
+					<Button data-testid='clear-filter-button' onClick={() => setFilter('')}>
+						{dictionary.clearFilters}
+					</Button>
 				</Wrapper>
 			</Col>
 		</Row>

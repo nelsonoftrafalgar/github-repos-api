@@ -88,7 +88,7 @@ const Repo: FC<IRepo> = ({
 	const color = `${language ? language.color : ''}`
 
 	return (
-		<Wrapper borderTopColor={color} data-testid='RepoWrapper'>
+		<Wrapper borderTopColor={color} data-testid='repo-wrapper'>
 			<InnerContainer>
 				<Title>{name}</Title>
 				<LinkWrapper>
