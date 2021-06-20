@@ -1,6 +1,7 @@
 import Col from 'styles/Col'
 import Repo from 'components/Repo'
 import Row from 'styles/Row'
+import { dictionary } from 'dictionary'
 import styled from 'styled-components'
 import { useStore } from 'store/Store'
 
@@ -29,7 +30,7 @@ const List = () => {
 	const { repoList, loading, error, isEmptySearch, search } = useStore()
 
 	if (search && isEmptySearch) {
-		return <EmptySearch>Empty search</EmptySearch>
+		return <EmptySearch>{dictionary.emptySearch}</EmptySearch>
 	}
 
 	if (error) {
@@ -37,7 +38,7 @@ const List = () => {
 	}
 
 	if (loading) {
-		return <Loader>Loading ...</Loader>
+		return <Loader>{dictionary.loading}</Loader>
 	}
 
 	return (

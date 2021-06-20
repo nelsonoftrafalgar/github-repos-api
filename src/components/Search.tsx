@@ -2,6 +2,7 @@ import { breakpoints, mediaQueries } from 'styles/responsive'
 
 import Col from 'styles/Col'
 import Row from 'styles/Row'
+import { dictionary } from 'dictionary'
 import styled from 'styled-components'
 import { useStore } from 'store/Store'
 import { vars } from 'styles/vars'
@@ -52,7 +53,7 @@ const Button = styled.button`
 
 const Search = () => {
 	const { search, setSearch, filter, setFilter, languages } = useStore()
-	const selectValue = filter || 'Select language'
+	const selectValue = filter || dictionary.selectLanguage
 
 	return (
 		<Row>
@@ -60,11 +61,11 @@ const Search = () => {
 				<Wrapper>
 					<Input
 						type='text'
-						placeholder='Search'
+						placeholder={dictionary.search}
 						value={search}
 						onChange={(e) => setSearch(e.currentTarget.value)}
 					/>
-					<Button onClick={() => setSearch('')}>Clear search</Button>
+					<Button onClick={() => setSearch('')}>{dictionary.clearSearch}</Button>
 				</Wrapper>
 			</Col>
 			<Col md={6} mt={30}>
@@ -83,7 +84,7 @@ const Search = () => {
 							</option>
 						))}
 					</Select>
-					<Button onClick={() => setFilter('')}>Clear filters</Button>
+					<Button onClick={() => setFilter('')}>{dictionary.clearFilters}</Button>
 				</Wrapper>
 			</Col>
 		</Row>

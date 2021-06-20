@@ -1,5 +1,6 @@
 import { breakpoints, mediaQueries } from 'styles/responsive'
 
+import { dictionary } from 'dictionary'
 import styled from 'styled-components'
 import { vars } from 'styles/vars'
 
@@ -21,7 +22,7 @@ const Wrapper = styled.div`
 const Title = () => {
 	return (
 		<Wrapper>
-			<Heading>Search Github repositories</Heading>
+			<Heading>{dictionary.appTitle}</Heading>
 		</Wrapper>
 	)
 }
