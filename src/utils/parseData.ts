@@ -1,6 +1,6 @@
-import { IRawData } from 'store/types'
+import { IRawData, IRepo } from 'store/types'
 
-export const parseData = (rawData: IRawData) => {
+export const parseData = (rawData: IRawData): IRepo[] => {
 	return rawData.search.edges.map(({ node }) => ({
 		fullName: node.nameWithOwner,
 		stargazersCount: node.stargazers.totalCount,
